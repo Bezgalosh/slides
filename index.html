@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Теория графов</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/night.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+
+		<style>
+			h1 {
+				font-size: 110px !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="center">
+					<h1>Теория графов</h1>
+				</section>
+				<section>
+					<h2>Определение</h2>
+				</section>
+				<section data-markdown="markdown/definition1.md">
+				</section>
+				</section>
+				<section data-markdown="markdown/definition2.md">
+				</section>
+				<section>
+					<h2>Задача о семи кёнинсбергских мостах</h2>
+				</section>
+				</section>
+				<section data-markdown="markdown/problem.md">
+				</section>
+				<section class="center">
+					<!-- Низкое качество -->
+					<section data-background-image="html/img/most.png" data-background-size="contain"></section>
+				</section>
+				<section>
+					<h2>Решение задачи</h2>
+				</section>
+				<section data-markdown="markdown/solve.md">
+				</section>
+				<section data-markdown="markdown/solve2.md">
+				</section>
+				<section>
+					<section data-markdown>
+						<script type ="text/template">
+							### Доходность по методу Дитца
+							Введем обозначения:
+
+							- $R$ - доходность портфеля в процентах
+							
+							- $S_e$ - стоимость портфеля на конец периода
+							- $S_b$ - стоимость портфеля на начало периода
+							- $S_a$ - пополнение счета
+							- $S_w$ - снятия со счета
+							- $W_t$ - временной весовой коэффициент, который применяется к каждому 
+							денежному потоку в порфеле
+							- $T$ - длительность отчетного периода в днях, за который считается
+							доходность
+							- $t$ - количество дней с начала инвестирования
+						</script>
+					</section>
+					<section data-markdown>
+						<script type ="text/template">
+							
+							
+							$$
+							W_t = \dfrac{T-t}{T}
+							$$
+							
+							$$
+							R = \dfrac{S_e - S_b - \sum S_a + \sum S_w}{S_b + \sum(S_aW_t) - \sum(S_wW_t)}
+							$$
+						</script>
+					</section>
+				</section>
+				<section class="center">
+					<h2>Графики</h2>
+				</section>
+				<section data-markdown="markdown/line_chart.md"></section> 
+				<section data-markdown="markdown/candlestick.md"></section>
+				<section data-fullscreen>
+					<iframe data-src="html/candelstick.html"
+					class="stretch"></iframe>
+				</section>
+				<section class="center">
+					<h2>Юмор</h2>
+					<!-- Низкое качество -->
+					<section data-background-image="html/img/dino.png" data-background-size="contain"></section>
+					<!-- Вертикальное-->
+					<section data-background-image="html/img/saga.png" data-background-size="contain"></section>
+					<!-- Высокое качество -->
+					<section><img scr="html/img/would.jpg"></section>
+				</section>
+				<section class="center" data-menu-title="Заключительный слайд">
+					Спасибо за внимание!
+			</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				center: false,
+				slideNumber: true,
+				controls: true,
+				dependencies: [
+					{
+						src: 'plugin/menu/menu.js'
+					},
+					{
+						src: 'plugin/fullscreen/fullscreen.js'
+					},
+					{
+						src: 'plugin/katex/katex.js',
+						async:true,
+					},
+				],
+				menu: {
+				numbers: true,
+				markers: true,
+				},
+				
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>

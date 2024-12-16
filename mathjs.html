@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src ="https://isp.9pr.ru/mathlibrary/math.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css" integrity="sha384-NFTC4wvyQKLwuJ8Ez9AvPNBv8zcC2XaQzXSMvtORKw28BdJbB2QE8Ka+OyrIHcQJ" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.js" integrity="sha384-z9arB7KJHppq8kK9AESncXcQd/KXIMMPiCrAdxfFpp+5QU438lgBE7UFGbk+gljP" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+    <div id="table"></div>
+    <script>
+        window.onload = () => {
+            const funcs = [
+                'const',
+                'x',
+                'x^n',
+                'sqrt(x)',
+                'a^x',
+                'e^x',
+                'sin(x)',
+                'cos(x)',
+                'tan(x)',
+                'asin(x)',
+                'acos(x)',
+                'atan(x)',
+                'log(x)',
+                'log(x,a)',
+            ];
+            let table = '<table><thead>';
+                table += '<tr><th>Функция</th><th>Производная</th></tr>'
+                table += '<tbody>';
+                    for (let func of funcs) {
+                        table += '<tr>';
+                        table += '<td>'+katex.renderToString(math.parse(func).toTex())+'</td>';
+                        table += '<td>'+katex.renderToString(math.derivative(func, 'x').toTex())+'</td>';
+                        table += '</tr>';
+                    }
+                table += '</tbody></table>';
+            document.querySelector('#table').innerHTML = table;
+
+        }
+    </script>
+</body>
+</html>
