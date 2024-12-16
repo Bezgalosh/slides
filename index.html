@@ -50,56 +50,41 @@
 				</section>
 				<section data-markdown="markdown/solve2.md">
 				</section>
+				<section data-markdown="markdown/solve3.md">
+				</section>
+				<section data-markdown="markdown/solve4.md">
+				</section>
+				<section data-markdown="markdown/solve5.md">
+				</section>
+				<section>
+					<h2>Алгоритм Дейкстры</h2>
+				</section>
+				<section data-markdown="markdown/alg1.md">
+				</section>
+				<section data-markdown="markdown/alg2.md">
+				</section>
 				<section>
 					<section data-markdown>
 						<script type ="text/template">
-							### Доходность по методу Дитца
-							Введем обозначения:
-
-							- $R$ - доходность портфеля в процентах
-							
-							- $S_e$ - стоимость портфеля на конец периода
-							- $S_b$ - стоимость портфеля на начало периода
-							- $S_a$ - пополнение счета
-							- $S_w$ - снятия со счета
-							- $W_t$ - временной весовой коэффициент, который применяется к каждому 
-							денежному потоку в порфеле
-							- $T$ - длительность отчетного периода в днях, за который считается
-							доходность
-							- $t$ - количество дней с начала инвестирования
+							### Шаг метода
+							Если все вершины посещены, алгоритм завершается.В противном случае, 
+							из ещё не посещённых вершин выбирается вершина $u$, имеющая минимальную метку.
+							Мы рассматриваем все возможные маршруты, в которых $u$ является предпоследним пунктом.
+							Вершины, в которые ведут рёбра из $u$, назовём соседями этой вершины.  
 						</script>
 					</section>
 					<section data-markdown>
 						<script type ="text/template">
-							
-							
-							$$
-							W_t = \dfrac{T-t}{T}
-							$$
-							
-							$$
-							R = \dfrac{S_e - S_b - \sum S_a + \sum S_w}{S_b + \sum(S_aW_t) - \sum(S_wW_t)}
-							$$
+							Для каждого соседа вершины $u$, кроме отмеченных как посещённые, рассмотрим новую длину пути, 
+							равную сумме значений текущей метки $u$ и длины ребра, соединяющего $u$ с этим соседом.
+							Если полученное значение длины меньше значения метки соседа, заменим значение метки полученным значением длины. 
+							Рассмотрев всех соседей, пометим вершину $u$ как посещённую и повторим шаг алгоритма.
 						</script>
 					</section>
 				</section>
-				<section class="center">
-					<h2>Графики</h2>
+				<section data-markdown="markdown/alg3.md">
 				</section>
-				<section data-markdown="markdown/line_chart.md"></section> 
-				<section data-markdown="markdown/candlestick.md"></section>
-				<section data-fullscreen>
-					<iframe data-src="html/candelstick.html"
-					class="stretch"></iframe>
-				</section>
-				<section class="center">
-					<h2>Юмор</h2>
-					<!-- Низкое качество -->
-					<section data-background-image="html/img/dino.png" data-background-size="contain"></section>
-					<!-- Вертикальное-->
-					<section data-background-image="html/img/saga.png" data-background-size="contain"></section>
-					<!-- Высокое качество -->
-					<section><img scr="html/img/would.jpg"></section>
+				<section data-markdown="markdown/alg4.md">
 				</section>
 				<section class="center" data-menu-title="Заключительный слайд">
 					Спасибо за внимание!
