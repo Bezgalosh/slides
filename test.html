@@ -1,114 +1,34 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Две метки и линия на карте</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+</head>
+<body>
 
-		<title>Теория графов</title>
+    <label for="citySelect1">Выберите первый город:</label>
+    <select id="citySelect1">
+        <option value="">-- Выберите город --</option>
+    </select>
+    <br><br>
+    <label for="citySelect2">Выберите второй город:</label>
+    <select id="citySelect2">
+        <option value="">-- Выберите город --</option>
+    </select>
+    <br><br>
+    <div id="map" style="height: 400px; width: 500px;"></div> 
+   
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/night.css" id="theme">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-
-		<style>
-			h1 {
-				font-size: 110px !important;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section class="center">
-					<h1>Теория графов</h1>
-				</section>
-				<section class="center" data-menu-title="Определение">
-					<h2>Определение</h2>
-				</section>
-				<section data-markdown="markdown/definition1.md">
-				</section>
-				</section>
-				<section data-markdown="markdown/definition2.md">
-				</section>
-				<section class="center" data-menu-title="Задача о семи кёнинсбергских мостах">
-					<h2>Задача о семи кёнинсбергских мостах</h2>
-				</section>
-				</section>
-				<section data-markdown="markdown/problem.md">
-				</section>
-				<section class="center">
-					<!-- Низкое качество -->
-					<section data-background-image="img/most.png" data-background-size="contain"></section>
-				</section>
-				<section class="center" data-menu-title="Решение задачи">
-					<h2>Решение задачи</h2>
-				</section>
-				<section data-markdown="markdown/solve.md">
-				</section>
-				<section data-markdown="markdown/solve2.md">
-				</section>
-				<section data-markdown="markdown/solve3.md">
-				</section>
-				<section data-markdown="markdown/solve4.md">
-				</section>
-				<section data-markdown="markdown/solve5.md">
-				</section>
-				<section class="center" data-menu-title="Алгоритм Дейкстры">
-					<h2>Алгоритм Дейкстры</h2>
-				</section>
-				<section data-markdown="markdown/alg1.md">
-				</section>
-				<section data-markdown="markdown/alg2.md">
-				</section>
-				<section>
-					<section data-markdown>
-						<script type ="text/template">
-							### Шаг метода
-							Если все вершины посещены, алгоритм завершается.В противном случае, 
-							из ещё не посещённых вершин выбирается вершина $u$, имеющая минимальную метку.
-							Мы рассматриваем все возможные маршруты, в которых $u$ является предпоследним пунктом.
-							Вершины, в которые ведут рёбра из $u$, назовём соседями этой вершины.  
-						</script>
-					</section>
-					<section data-markdown>
-						<script type ="text/template">
-							Для каждого соседа вершины $u$, кроме отмеченных как посещённые, рассмотрим новую длину пути, 
-							равную сумме значений текущей метки $u$ и длины ребра, соединяющего $u$ с этим соседом.
-							Если полученное значение длины меньше значения метки соседа, заменим значение метки полученным значением длины. 
-							Рассмотрев всех соседей, пометим вершину $u$ как посещённую и повторим шаг алгоритма.
-						</script>
-					</section>
-				</section>
-				<section data-markdown="markdown/alg3.md">
-				</section>
-				<section data-markdown="markdown/alg4.md">
-				</section>
-				<section class="center" data-menu-title="Ортодрома">
-					<h2>Ортодрома</h2>
-				</section>
-				<section>
-					<h2>Ортодрома</h2>
-					<label for="city1">Город 1:</label>
-					<select id="city1">
-						<option value="">--Выберите город--</option>
-					</select>
-				
-					<label for="city2">Город 2:</label>
-					<select id="city2">
-						<option value="">--Выберите город--</option>
-					</select>
-				
-					
-				
-					<div id="map" style="height: 100px; margin-top: 20px;"></div>
-				
-					<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-					<script>
-						// Массив городов
-						const cities = [
+    <script>
+        const cities = [
 				{
 					"city": "Майкоп",
 					"region": "Адыгея",
@@ -609,20 +529,19 @@
 				}
 			];
 
-				
-				// Заполнение выпадающих списков городами
-						const citySelects = [document.getElementById('city1'), document.getElementById('city2')];
 
-			citySelects.forEach(select => {
-				cities.forEach(city => {
-					const option = document.createElement('option');
-					option.value = city.city;
-					option.textContent = `${city.city} (${city.region})`;
-					select.appendChild(option);
-				});
-			});
+        const citySelects = [document.getElementById('citySelect1'), document.getElementById('citySelect2')];
 
-			const map = L.map('map').setView([55, 37], 6);
+        citySelects.forEach(select => {
+            cities.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city.city;
+                option.textContent = `${city.city} (${city.region})`;
+                select.appendChild(option);
+            });
+        });
+
+        const map = L.map('map').setView([15, 37], 10); //широта и долгота, маштаб
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
@@ -659,7 +578,6 @@
             if (markers.length > 0) {
                 const group = L.featureGroup(markers);
                 map.fitBounds(group.getBounds());
-				//map.setZoom(4);
             }
         }
 
@@ -667,56 +585,7 @@
             select.addEventListener('change', updateMap);
         });
 
-					</script>
-				</section>
-				<section class="center" data-menu-title="Юмор">
-					<h2>Юмор</h2>
-			</section>
-				<section class="center">
-					<section data-background-image="img/1.png" data-background-size="contain"></section>
-					<section data-background-image="img/3.jpg" data-background-size="contain"></section>
-					<section data-background-image="img/2.jpg" data-background-size="contain"></section>
-				</section>
-				<section class="center" data-menu-title="Заключительный слайд">
-					Спасибо за внимание!
-			</section>
-			</div>
-		</div>
+    </script>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
-				center: false,
-				slideNumber: true,
-				controls: true,
-				dependencies: [
-					{
-						src: 'plugin/menu/menu.js'
-					},
-					{
-						src: 'plugin/fullscreen/fullscreen.js'
-					},
-					{
-						src: 'plugin/katex/katex.js',
-						async:true,
-					},
-				],
-				menu: {
-				numbers: true,
-				markers: true,
-				},
-				
-
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+</body>
 </html>
